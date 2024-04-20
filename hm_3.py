@@ -28,7 +28,7 @@ import random
 
 def get_numbers_ticket(min, max, quantity):
 
-    if min < 0 or max > 1000:
+    if min < 0 or max > 1000 or min > max:
         return []
     else:
         numbers = set()
@@ -36,9 +36,9 @@ def get_numbers_ticket(min, max, quantity):
             numbers.add(random.randint(min, max))
 
         return sorted(numbers)
-min = 1
-max = 1000
-quantity = 20
+min = 10
+max = 4
+quantity = 5
 print(get_numbers_ticket(min, max, quantity))
 
 
@@ -51,17 +51,13 @@ NUM_3
 import re
 
 def normalize_phone(phone_number):
-    sanitized_numbers = []
-    for phone in phone_number:
-        sanitized_number = re.sub(r'\D', '', phone)
-        if not sanitized_number.startswith('+'):
-            if sanitized_number.startswith('380'):
-                sanitized_number = '+' + sanitized_number
-            else:
-                sanitized_number = '+38' + sanitized_number
-        sanitized_numbers.append(sanitized_number)
-
-    return sanitized_numbers
+    sanitized_number = re.sub(r'\D', '', phone_number)
+    if not sanitized_number.startswith('+'):
+        if sanitized_number.startswith('380'):
+            sanitized_number = '+' + sanitized_number
+        else:
+            sanitized_number = '+38' + sanitized_number
+    return sanitized_number
 
 raw_numbers = [
     "067\\t123 4567",
@@ -75,4 +71,5 @@ raw_numbers = [
     "38050 111 22 11   ",
 ]
 
-print(normalize_phone(raw_numbers))
+for number in raw_numbers:
+    print(normalize_phone(number))
