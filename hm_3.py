@@ -26,20 +26,19 @@ NUM_2
 
 import random
 
-def get_numbers_ticket(min, max, quantity):
-
-    if min < 0 or max > 1000 or min > max:
+def get_numbers_ticket(min_value, max_value, quantity):
+    if not (1 <= min_value <= max_value <= 1000) or quantity > (max_value - min_value + 1):
         return []
     else:
         numbers = set()
         while len(numbers) < quantity:
-            numbers.add(random.randint(min, max))
-
+            numbers.add(random.randint(min_value, max_value))
         return sorted(numbers)
-min = 10
-max = 4
-quantity = 5
-print(get_numbers_ticket(min, max, quantity))
+
+min_value = 10
+max_value = 14
+quantity = 6
+print(get_numbers_ticket(min_value, max_value, quantity))
 
 
 """
